@@ -1,0 +1,121 @@
+<odoo>
+    <!-- Para crear la accion de ventana-->
+    <record id="estate_property_action" model="ir.actions.act_window">
+        <field name="name">Estate Property</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">list,form</field>
+        <!-- Genera un filtro por default en la barra de búsqueda-->
+        <field name="context">{'search_default_state':True}</field>
+    </record>
+
+    <!-- Para poner el titulo a la tabla-->
+    <record id="estate_property_tree_view" model="ir.ui.view">
+        <field name="name">estate.property.tree</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="tag_ids"></field>
+                <field name="property_type_id"></field>
+                <field name="name"></field>
+                <field name="postcode"></field>
+                <field name="bedrooms"></field>
+                <field name="living_area"></field>
+                <field name="expected_price"></field>
+                <field name="selling_price"></field>
+                <field name="date_availability"></field>
+            </list>
+        </field>
+    </record>
+
+    <!-- cuando se selecciona el objeto aparece esta vista formulario-->
+    <record id="estate_property_view_form" model="ir.ui.view">
+        <field name="name">estate.property.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form name="Description">
+                <header>
+                    <button name="action_sold" type="object" string="Sold" icon="fa-check" invisible="state != 'offer_accepted'"></button>
+                    <button name="action_cancel" type="object" string="Cancel" icon="fa-ban" invisible="state != 'offer_accepted'"></button>
+                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
+                </header>
+                <sheet>
+                    <h1 class="oe_title">
+                        <field name="name"></field>
+                    </h1>
+                    <group>
+                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"></field>
+                        <group>
+                            <field name="property_type_id" options="{'no_create': True, 'no_open': True}"></field>
+                            <field name="postcode"></field>
+                            <field name="date_availability" optional="True"></field>
+                        </group>
+                        <group>
+                            <field name="expected_price"></field>
+                            <field name="best_price"></field>
+                            <field name="selling_price"></field>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Details">
+                            <group>
+                                <field name="description"></field>
+                                <field name="bedrooms"></field>
+                                <field name="living_area"></field>
+                                <field name="facades"></field>
+                                <field name="garage"></field>
+                                <field name="garden"></field>
+                                <field name="garden_area" invisible="not garden"></field>
+                                <field name="garden_orientation" invisible="not garden"></field>
+                                <field name="state" invisible="True"></field>
+                                <field name="active"></field>
+                                <field name="total_area"></field>
+                            </group>
+                        </page>
+                        <page string="Offers">
+                            <group>
+                                <field name="offer_ids" readonly="state == 'sold' or state == 'canceled' or state == 'offer_accepted'" 
+                                decoration-success="state == 'offer_received'" decoration-bf="state == 'offer_accepted'" decoration-muted="state == 'sold'"
+                                decoration-danger="state == 'canceled'" 
+                                ></field>
+
+                            </group>
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <field name="user_id"></field>
+                                <field name="buyer_id"></field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- XML does not allow < and & to be used inside XML elements. 
+ To avoid parsing errors, entity references should be used: &lt; for < and &amp; 
+ for &. Other entity references (&gt;, &apos; & &quot;) are optional.-->
+    <record id="estate_property_search_view" model="ir.ui.view">
+        <field name="name">estate.property.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Busqueda de propiedades">                
+                <filter name="name" string="Property Name" />
+                <filter name="property_type_id" string="Property Type" />
+                <filter name="postcode" string="Postcode" />
+                <filter name="expected_price" string="Expected Price > 10"
+                    domain="[('expected_price','>',10)]" />
+                <!-- The logical operators & (AND), | (OR) and ! (NOT) 
+                 can be used to explicitly combine criteria. They are used in prefix position 
+                 (the operator is inserted before its arguments rather than between)-->
+                <filter name="state" string="Available properties"
+                    domain="['|',('state', '=','new'),('state','=','offer_received')]" />
+                <separator />
+                <filter name="group_by_postcode" string="Postcode" context="{'group_by':'postcode'}" />
+                <!-- Filter domain 
+                <filter name="living_area" string="Living Area" filter_domain="[('total_area','ilike',self)]" />
+                    -->
+                
+            </search>
+        </field>
+    </record>
+</odoo>

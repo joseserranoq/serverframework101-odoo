@@ -1,0 +1,56 @@
+<odoo>
+    <!-- Para crear la accion de ventana-->
+    <record id="estate_property_type_action" model="ir.actions.act_window">
+        <field name="name">Estate Property Type</field>
+        <field name="res_model">estate.property.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <!-- Para poner el titulo a la tabla-->
+    <record id="estate_property_type_form_view" model="ir.ui.view">
+        <field name="name">estate.property.type.form</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <sheet>
+                    <!-- I want the button in the right corner with a dollar icon-->
+                    <!-- <button type="action" name="%(estate_property_offer_action)d" 
+                    class="oe_stat_button" icon="fa-dollar" help="View Offers" position="before">
+                        <div class="o_field_widget o_stat_info o_stat_clickable">
+                            <span class="o_stat_value o_field_number o_field_integer">
+                                <field name="offer_count"/>
+                            </span>
+                            <span class="o_stat_text o_field_number o_field_integer"> Offers</span>
+                        </div>
+                    </button> -->
+                    <div class="oe_button_box" name="button_box">
+                        <button type="action" name="%(estate_property_offer_action)d"
+                            class="oe_stat_button" icon="fa-dollar">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="offer_count" />
+                                </span>
+                                <span class="o_stat_text">Offers</span>
+                            </div>
+                        </button>
+                    </div>
+                    <h1 class="oe_title">
+                        <field name="name"></field>
+                    </h1>
+                    <notebook>
+                        <page string="Properties">
+                            <field name="sequence" widget="handle"></field>
+                            <field name="property_ids">
+                                <list>
+                                    <field name="name"></field>
+                                    <field name="expected_price"></field>
+                                    <field name="state"></field>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

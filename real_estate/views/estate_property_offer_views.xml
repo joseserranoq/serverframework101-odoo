@@ -1,0 +1,44 @@
+<odoo>
+    
+    <record id="estate_property_offer_action" model="ir.actions.act_window">
+        <field name="name">Estate Property Offer</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">list,form</field>
+        <!-- domain makes that all the property_type_id of the same button clicked appear in the list-->
+        <field name="domain">[("property_type_id", "=", active_id)]</field>
+    </record>
+    
+    <record id="estate_property_offer_form_view" model="ir.ui.view">
+        <field name="name">estate.property.offer.form</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <form>                       
+                <group>
+                    <field name="price"></field>
+                    <field name="partner_id"></field>
+                    <field name="validity"></field>
+                    <field name="date_deadline"></field>
+                    <field name="status"></field>
+                </group>                
+            </form>
+        </field>
+    </record>
+
+    <record id="estate_property_offer_list_view" model="ir.ui.view">
+        <field name="name">estate.property.offer.list</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">                
+                <field name="property_type_id"></field>
+                <field name="price"></field>
+                <field name="partner_id"></field>
+                <field name="validity"></field>
+                <field name="date_deadline"></field>
+                <button name="accept_offer" type="object" icon="fa-check" string="" invisible="status != 'pending'"></button>
+                <button name="refuse_offer" type="object" icon="fa-times" string="" invisible="status != 'pending'"></button>
+                <field name="status"></field>
+            </list>
+        </field>
+    </record>
+
+</odoo>

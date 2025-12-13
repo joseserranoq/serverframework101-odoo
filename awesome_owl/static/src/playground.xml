@@ -6,23 +6,22 @@
             <h1>Owl Playground</h1>
             <Counter/>
             <Counter/>
-            <Card title="'my title'" content="'some content'"/>
+            <Card title="title1" content="content1" />
+            <Card title="title2" content="content2" />
         </div>
     </t>
     <t t-name="awesome_owl.counter">
         <div>
             <p>Counter: <t t-esc="count.value"/></p>
-            <button t-on-click="increment">Increment</button>
+            <button class="btn btn-primary" t-on-click="increment">Increment</button>
         </div>
     </t>
 
     <t t-name="awesome_owl.card">
         <div class="card d-inline-block m-2" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">my title</h5>
-                <p class="card-text">
-                some content
-                </p>
+                <h5 class="card-title"><t t-esc="props.title"/></h5>
+                <p class="card-text"><t t-out="props.content"/></p>
             </div>
         </div>
     </t>

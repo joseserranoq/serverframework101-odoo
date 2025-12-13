@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    
+    <t t-name="awesome_owl.playground">
+        <div>
+            <h1>Owl Playground</h1>
+            <Counter/>
+            <Counter/>
+            <Card title="'my title'" content="'some content'"/>
+        </div>
+    </t>
+    <t t-name="awesome_owl.counter">
+        <div>
+            <p>Counter: <t t-esc="count.value"/></p>
+            <button t-on-click="increment">Increment</button>
+        </div>
+    </t>
+
+    <t t-name="awesome_owl.card">
+        <div class="card d-inline-block m-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">my title</h5>
+                <p class="card-text">
+                some content
+                </p>
+            </div>
+        </div>
+    </t>
+    
+</templates>

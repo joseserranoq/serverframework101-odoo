@@ -4,8 +4,9 @@
     <t t-name="awesome_owl.playground">
         <div>
             <h1>Owl Playground</h1>
-            <Counter/>
-            <Counter/>
+            <Counter onChange="onChange"/>
+            <Counter onChange="onChange"/>
+            <p>The sum is: <t t-esc="sum.value"/></p>
             <Card title="title1" content="content1" />
             <Card title="title2" content="content2" />
         </div>
@@ -13,7 +14,7 @@
     <t t-name="awesome_owl.counter">
         <div>
             <p>Counter: <t t-esc="count.value"/></p>
-            <button class="btn btn-primary" t-on-click="increment">Increment</button>
+            <button class="btn btn-success" t-on-click="increment">Increment</button>
         </div>
     </t>
 

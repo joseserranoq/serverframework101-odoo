@@ -7,7 +7,8 @@ export class Playground extends Component {
     static components = { Counter, Card };
 
     setup() {
-        this.count = useState({ value: 0 });
+        this.sum = useState({ value: 0 });
+        this.onChange = this.onChange.bind(this);
         // plain string → escaped by t-out
         this.content1 = "<div class='text-primary'>some content</div>";
         // markup() → rendered as HTML by t-out
@@ -16,8 +17,9 @@ export class Playground extends Component {
         this.title1 = "card 1";
         this.title2 = "card 2";
     }
-
-    increment() {
-        this.count.value++;
+    onChange() {
+        this.sum.value++;
     }
+
+
 }

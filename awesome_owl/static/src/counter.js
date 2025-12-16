@@ -11,7 +11,8 @@ export class Counter extends Component {
     increment() {
         this.count.value++;
         if (this.props.onChange) {
-            this.sum.value ++;
+            this.props.onChange();
+            console.log('onChange called from Counter');
         }
     }
 }

@@ -8,12 +8,15 @@ export class Playground extends Component {
 
     setup() {
         this.sum = useState({ value: 0 });
-        this.onChange = this.onChange.bind(this);
+        // to bind it needs a function in the father compoonent 
+        // and also the line of code below
+        // or we can use callback.bind in the XML 
+        // in this case onChange.bind="onChange"
+        //this.onChange = this.onChange.bind(this);
         // plain string → escaped by t-out
         this.content1 = "<div class='text-primary'>some content</div>";
         // markup() → rendered as HTML by t-out
         this.content2 = markup("<div class='text-primary'>some content</div>");
-
         this.title1 = "card 1";
         this.title2 = "card 2";
     }

@@ -9,6 +9,7 @@
             <p>The sum is: <t t-esc="sum.value"/></p>
             <Card title="title1" content="content1" />
             <Card title="title2" content="content2" />
+            <TodoList todos="todos"/>
         </div>
     </t>
     <t t-name="awesome_owl.counter">
@@ -24,6 +25,19 @@
                 <h5 class="card-title"><t t-esc="props.title"/></h5>
                 <p class="card-text"><t t-out="props.content"/></p>
             </div>
+        </div>
+    </t>
+
+    <t t-name="awesome_owl.todolist">
+        <div>
+            <h2>Todo List</h2>
+            <ol>
+                <t t-foreach="props.todos" t-as="todos" t-key="todos.id">                    
+                    <ul>
+                        <div><t t-esc="todos.id"/>.<t t-esc="todos.description"/></div>                        
+                    </ul>                    
+                </t>
+            </ol>
         </div>
     </t>
     

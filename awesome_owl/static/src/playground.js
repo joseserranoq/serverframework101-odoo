@@ -20,13 +20,15 @@ export class Playground extends Component {
         this.content2 = markup("<div class='text-primary'>some content</div>");
         this.title1 = "card 1";
         this.title2 = "card 2";
-        this.todos = useState([
-            {id: 1, description: "Buy groceries", isCompleted: false},
-            {id: 2, description: "Walk the dog", isCompleted: true},
-            {id: 3, description: "Read a book", isCompleted: false},
-        ]);
+        // this.todos = useState([
+        //     {id: 1, description: "Buy groceries", isCompleted: false},
+        //     {id: 2, description: "Walk the dog", isCompleted: true},
+        //     {id: 3, description: "Read a book", isCompleted: false},
+        // ]);
+        this.todos = [];
     }
     onChange() {
         this.sum.value++;
     }
+
 }

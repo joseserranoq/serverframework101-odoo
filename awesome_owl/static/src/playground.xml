@@ -31,11 +31,12 @@
     <t t-name="awesome_owl.todolist">
         <div>
             <h2>Todo List</h2>
+            <input type="text" placeholder="Add a new todo" onChange="(e)=>addTodo()"/>
             <ol>
                 <t t-foreach="props.todos" t-as="todos" t-key="todos.id">                    
-                    <ul>
-                        <div><t t-esc="todos.id"/>.<t t-esc="todos.description"/></div>                        
-                    </ul>                    
+                    <li class="todo-item">
+                        <div t-att-class="{'text-muted text-decoration-line-through': todos.isCompleted}"><t t-esc="todos.id"/>.<t t-esc="todos.description" /></div>                        
+                    </li>                    
                 </t>
             </ol>
         </div>

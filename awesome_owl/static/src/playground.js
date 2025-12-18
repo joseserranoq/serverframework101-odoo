@@ -25,10 +25,9 @@ export class Playground extends Component {
         //     {id: 2, description: "Walk the dog", isCompleted: true},
         //     {id: 3, description: "Read a book", isCompleted: false},
         // ]);
-        this.todos = [];
+        this.todos = useState([]);
     }
     onChange() {
         this.sum.value++;
     }
-
 }

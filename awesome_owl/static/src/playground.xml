@@ -31,7 +31,8 @@
     <t t-name="awesome_owl.todolist">
         <div>
             <h2>Todo List</h2>
-            <input type="text" placeholder="Add a new todo" onChange="(e)=>addTodo()"/>
+            <!-- t-on-theEvent=function-->
+            <input type="text" placeholder="Add a new todo" t-on-keyup="(e)=>this.addTodo(e,props.todos)"/>
             <ol>
                 <t t-foreach="props.todos" t-as="todos" t-key="todos.id">                    
                     <li class="todo-item">

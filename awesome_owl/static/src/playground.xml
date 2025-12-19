@@ -9,7 +9,7 @@
             <p>The sum is: <t t-esc="sum.value"/></p>
             <Card title="title1" content="content1" />
             <Card title="title2" content="content2" />
-            <TodoList todos="todos"/>
+            <TodoList todos="todos" toggleState.bind="toggleState"/>
         </div>
     </t>
     <t t-name="awesome_owl.counter">
@@ -32,14 +32,19 @@
         <div>
             <h2>Todo List</h2>
             <!-- t-on-theEvent=function-->
-            <input type="text" placeholder="Add a new todo" t-on-keyup="(e)=>this.addTodo(e,props.todos)"/>
-            <ol>
+            <input type="text" placeholder="Add a new todo" t-on-keyup="(e)=>this.addTodo(e,props.todos)" t-ref="todo-input" autofocus="true"/>
+            <dl>
                 <t t-foreach="props.todos" t-as="todos" t-key="todos.id">                    
-                    <li class="todo-item">
-                        <div t-att-class="{'text-muted text-decoration-line-through': todos.isCompleted}"><t t-esc="todos.id"/>.<t t-esc="todos.description" /></div>                        
-                    </li>                    
+                    <dt class="todo-item">
+                        <div>
+                            <input type="checkbox" t-att-checked="todos.isCompleted" t-on-change="()=>props.toggleState(todos.id)"/>
+                            <span t-att-class="todos.isCompleted ? 'text-muted text-decoration-line-through' : ''">
+                                <t t-esc="todos.id"/>.<t t-esc="todos.description"/>
+                            </span>
+                        </div>                        
+                    </dt>                    
                 </t>
-            </ol>
+            </dl>
         </div>
     </t>
     

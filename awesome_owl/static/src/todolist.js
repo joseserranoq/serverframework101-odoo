@@ -1,9 +1,10 @@
-import { Component, useState } from "@odoo/owl";
+import { Component, useState,useRef } from "@odoo/owl";
 export class TodoList extends Component {
     static template = "awesome_owl.todolist";
-    static props = ["todos"];
+    static props = ["todos", "toggleState?"];
     setup() {
-        this.todos = useState([]);
+        //this.todos = useState([]);
+        this.myRef = useRef("todo-input");
     }
     addTodo(e) {
         e.preventDefault();
@@ -17,9 +18,6 @@ export class TodoList extends Component {
             this.props.todos.push(newTodo);
             e.target.value = "";
         }
-        console.log('Current todos:', this.props.todos);
-
     }
-    
 
 }

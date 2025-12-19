@@ -26,11 +26,5 @@ export class Playground extends Component {
     onChange() {
         this.sum.value++;
     }
-    toggleState(id) {
-        const todo = this.todos.find(t => t.id === id);
-        if (todo) {
-            todo.isCompleted = !todo.isCompleted;
-            console.log('Updated todos list:', this.todos);
-        }
-    }
+
 }

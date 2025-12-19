@@ -1,7 +1,7 @@
 import { Component, useState,useRef } from "@odoo/owl";
 export class TodoList extends Component {
     static template = "awesome_owl.todolist";
-    static props = ["todos", "toggleState?"];
+    static props = ["todos"];
     setup() {
         //this.todos = useState([]);
         this.myRef = useRef("todo-input");
@@ -19,5 +19,18 @@ export class TodoList extends Component {
             e.target.value = "";
         }
     }
-
+    toggleState(id) {
+        const todo = this.props.todos.find(t => t.id === id);
+        if (todo) {
+            todo.isCompleted = !todo.isCompleted;
+            console.log('Updated todos list:', this.props.todos);
+        }
+    }
+    removeTodo(id) {
+        const index = this.props.todos.findIndex(t => t.id === id);
+        if (index !== -1) {
+            this.props.todos.splice(index, 1);
+            console.log('Updated todos list after removal:', this.props.todos);
+        }
+    }
 }

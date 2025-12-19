@@ -7,9 +7,16 @@
             <Counter onChange.bind="onChange"/>
             <Counter onChange.bind="onChange"/>
             <p>The sum is: <t t-esc="sum.value"/></p>
-            <Card title="title1" content="content1" />
-            <Card title="title2" content="content2" />
-            <TodoList todos="todos" toggleState.bind="toggleState"/>
+            <!-- <Card title="title1" content="content1" />
+            <Card title="title2" content="content2" /> -->
+            <Card>
+                <p>This is some <strong>important</strong> content for card 1.</p>
+            </Card>
+            <Card>
+                <Counter onChange.bind="onChange"/>
+            </Card>
+
+            <TodoList todos="todos"/>
         </div>
     </t>
     <t t-name="awesome_owl.counter">
@@ -21,9 +28,10 @@
 
     <t t-name="awesome_owl.card">
         <div class="card d-inline-block m-2" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title"><t t-esc="props.title"/></h5>
-                <p class="card-text"><t t-out="props.content"/></p>
+            <div class="card-body" t-name="Card">
+                <!-- <h5 class="card-title"><t t-esc="props.title"/></h5> -->
+                <!-- <p class="card-text"><t t-out="props.content"/></p> -->
+                <t t-slot="default"/>
             </div>
         </div>
     </t>
@@ -37,10 +45,11 @@
                 <t t-foreach="props.todos" t-as="todos" t-key="todos.id">                    
                     <dt class="todo-item">
                         <div>
-                            <input type="checkbox" t-att-checked="todos.isCompleted" t-on-change="()=>props.toggleState(todos.id)"/>
+                            <input type="checkbox" t-att-checked="todos.isCompleted" t-on-change="()=>this.toggleState(todos.id)"/>
                             <span t-att-class="todos.isCompleted ? 'text-muted text-decoration-line-through' : ''">
                                 <t t-esc="todos.id"/>.<t t-esc="todos.description"/>
                             </span>
+                            <span class="fa fa-remove" t-on-click="()=>this.removeTodo(todos.id)"/>
                         </div>                        
                     </dt>                    
                 </t>
